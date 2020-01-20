@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="pc2lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/pc2lib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

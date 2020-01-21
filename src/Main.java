@@ -1,4 +1,11 @@
+import javax.swing.*;
 
 public class Main {
-    // WIP
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("PC2 Problem Setter");
+        frame.setContentPane(new MainFrame().panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 }

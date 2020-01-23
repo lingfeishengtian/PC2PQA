@@ -164,7 +164,7 @@ public class MainFrame {
         }
         try {
             log.append("\n" + data);
-            if (paint != null) {
+             if (paint != null) {
                 log.getHighlighter().addHighlight(log.getText().length() - data.length(), log.getText().length() + data.length() - 1, paint);
             }
         }catch (BadLocationException e){

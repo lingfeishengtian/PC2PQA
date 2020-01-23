@@ -51,9 +51,10 @@ public class MainFrame {
                     modifyFile(pc2RootSelected.getAbsolutePath() + File.separator + "bin" + File.separator + "profiles.properties", "profiles\\\\", "profiles/");
                     logSomething("Finished modify profiles.properties fix.", -1);
                     Hashtable config = extractor.getConfigHashTable(secure);
-                    Profile profile = ((Profile) config.get("PROBLEM"));
+                    Profile profile = ((Profile) config.get("PROFILE"));
                     profile.setProfilePath(profile.getProfilePath().replaceAll("\\\\", "/"));
                     extractor.writeConfigurationToDisk(config, secure);
+                    logSomething("Fixed profile path.", -1);
                 }else{
                     logSomething("\nPC2 root folder is invalid!", 0);
                 }
@@ -69,8 +70,21 @@ public class MainFrame {
                 pc2Loc.setText(pc2RootSelected.getName());
 
                 if(checkPC2Root()){
-                    extractor = new Extractor(new File(pc2RootSelected.getAbsolutePath() + File.separator + "bin" + File.separator + "profiles").listFiles()[0].getAbsolutePath());
+                    extractor = new Extractor(new File(pc2RootSelected.getAbsolutePath() + File.separator + "bin" + File.separator + "profiles").listFiles()[0].getAbsolutePath() + File.separator + "db.1");
                     secure = extractor.getFileSecurity(JOptionPane.showInputDialog(panel1, "Contest password?"));
+                    if(secure == null)
+                    {
+                        logSomething("Contest Password Incorrect", 0);
+                        extractor = null;
+                        secure = null;
+                        pc2RootSelected = null;
+                        pc2Loc.setText("");
+                    }else{
+                        logSomething("Loaded PC2 directory", -1);
+                    }
+                }else{
+                    pc2RootSelected = null;
+                    pc2Loc.setText("");
                 }
             }
         });

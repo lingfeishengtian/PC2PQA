@@ -1,4 +1,5 @@
 import com.lingfeishengtian.security.Extractor;
+import com.lingfeishengtian.utils.DefaultContest;
 import com.lingfeishengtian.utils.ProblemModifier;
 import edu.csus.ecs.pc2.core.model.Problem;
 import edu.csus.ecs.pc2.core.model.Profile;
@@ -25,6 +26,7 @@ public class MainFrame {
     private JLabel inoutRootLoc;
     private JButton selectProblemListButton;
     private JLabel problemListName;
+    private JButton setupDefaultCompetition;
     private JFileChooser fileChooser;
 
     private Highlighter.HighlightPainter redPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.red);
@@ -64,6 +66,17 @@ public class MainFrame {
                 }
             }else{
                 logSomething("You haven't selected a pc2 root folder yet!", 0);
+            }
+        });
+
+        setupDefaultCompetition.addActionListener(e -> {
+            if(pc2RootSelected != null){
+                Hashtable config = extractor.getConfigHashTable(secure);
+                DefaultContest.modifyContestToDefaultSettings(config);
+                extractor.writeConfigurationToDisk(config, secure);
+                logSomething("Default contest set succeeded", 1);
+            }else{
+                logSomething("PC2 root has not been initialized!", -1);
             }
         });
 
